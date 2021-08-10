@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 const port = process.env.PORT || 5000;
 
-app.get("/results/:searchVal", (req, res) => {
+app.get("/result/:searchVal", (req, res) => {
   const value = req.params.searchVal;
   axios.get(`https://imdb-api.com/en/API/Search/${process.env.API_KEY}/${value}`)
   .then((resp) => {
