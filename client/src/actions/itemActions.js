@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GET_ITEMS, ITEMS_LOADING } from "./types";
 
-export const getItems = (searchvAL) => dispatch => {
+export const getItems = (searchVal) => dispatch => {
   axios
     .get(`/result/${searchVal}`)
     .then(res => 
