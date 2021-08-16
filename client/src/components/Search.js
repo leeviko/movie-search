@@ -19,6 +19,7 @@ const Search = () => {
         value={searchVal} 
         onChange={(e) => setSearchVal(e.target.value)} 
         className="search-field" 
+        placeholder="eg. Inception"
       />         
       <button type="submit" className="search-btn">Hae</button>
     </form>
