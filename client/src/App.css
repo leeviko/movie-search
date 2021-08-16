@@ -42,8 +42,9 @@ body {
   padding: 0 5px;
   width: 25%;
   min-width: 250px;
-  border-radius: 5px;
   border: 1px solid black;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   border-right: none;
 }
 
@@ -62,5 +63,22 @@ body {
 }
 
 .search-form button:hover {
+  background-color: var(--blue);
+}
+
+.dropdown {
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.397);
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: var(--light-blue);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none;
+  padding: 5px;
+  transition: 0.15s;
+}
+
+.dropdown:hover {
   background-color: var(--blue);
 }
