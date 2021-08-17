@@ -1,14 +1,20 @@
 import './App.css';
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
 
 import Search from "./components/Search";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      {/* <Header /> */}
-      <Search />
-    </div>
+    <Router>
+      <div className="App">
+        {/* <Header /> */}
+        {/* <Search /> */}
+        <Navbar />
+      </div>
+    </Router>
   );
 }
 
