@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router
 } from "react-router-dom";
 
-import Search from "./components/Search";
 import Navbar from "./components/Navbar";
+import Content from "./components/Content";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         {/* <Header /> */}
         {/* <Search /> */}
         <Navbar />
+        <Content />
       </div>
     </Router>
   );
