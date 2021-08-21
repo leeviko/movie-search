@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Poster from "../images/startrek.jpg"
-
 const Card = ({ name, img }) => {
   return (
     <div className="card">
