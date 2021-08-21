@@ -5,14 +5,16 @@ import Card from "./Card";
 
 const Content = () => {
   const items = useSelector((state) => state.item.items)
+
+  
+
   console.log(items);
   return (
     <div className="content">
       <div className="content-container">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {items.map((item, i) => (
+          <Card img={item.image} name={item.title} />
+        ))}
 
       </div>
     </div>

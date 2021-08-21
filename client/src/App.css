@@ -106,17 +106,25 @@ a {
 }
 
 .card {
-  font-size: 0;
   margin: 15px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
   transition: 0.2s;
+}
+
+.card-body{
+  border-radius: 4px;
+  background-color: var(--dark);
+  font-size: 0;
 }
 
 .card-name {
   color: white;
   font-size: 1rem;
   margin: 0;
-  width: 100%;
   background-color: var(--dark);
+  width: 175px;
   
   padding: 3px 0;
   border-bottom-left-radius: 4px;
@@ -125,11 +133,13 @@ a {
 
 .card-img {
   margin: 0;
-  height: 250px;
+  width: 175px;
+
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
 
 .card:hover {
+  cursor: pointer;
   transform: translateY(-5px);
 }
