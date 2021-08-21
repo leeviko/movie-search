@@ -18,11 +18,11 @@ const Search = () => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e)} method="POST" className="search-form">
-      <select  defaultValue={selectVal} onChange={(e) => handleChange(e)} className="dropdown" name="search-type" id="search-type">
+      {/* <select  defaultValue={selectVal} onChange={(e) => handleChange(e)} className="dropdown" name="search-type" id="search-type">
         <option value="kaikki">Kaikki</option>
         <option value="elokuvat">Elokuvat</option>
         <option value="sarjat">TV-sarjat</option>
-      </select>
+      </select> */}
       <input 
         type="text" 
         name="search-value" 

@@ -4,7 +4,7 @@ import { GET_ITEMS, ITEMS_LOADING } from "./types";
 export const getItems = (searchVal) => dispatch => {
   dispatch({type: ITEMS_LOADING})
   axios
-    .get(`/result/${searchVal}`)
+    .get(`/api/items/result/${searchVal}`)
     .then(res => 
       dispatch({
         type: GET_ITEMS,

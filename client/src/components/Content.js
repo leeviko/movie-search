@@ -13,7 +13,7 @@ const Content = () => {
     <div className="content">
       <div className="content-container">
         {items.map((item, i) => (
-          <Card img={item.image} name={item.title} />
+          <Card key={i} img={item.image} name={item.title} />
         ))}
 
       </div>
