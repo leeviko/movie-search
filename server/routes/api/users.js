@@ -6,20 +6,21 @@ const db = require("../../config/db");
 const router = express.Router();
 
 
-router.get("/", (req,res) => {
-  const sql = "SELECT * FROM user";
-  const params = [];
-  db.all(sql,params, (err,rows) => {
-    if(err) {
-      res.status(400).json({"error": err.message});
-      return;
-    }
-    res.json({
-      "message": "success",
-      "data": rows
-    })
-  })
-})
+// router.get("/", (req,res) => {
+//   const sql = "SELECT * FROM users";
+//   const params = [];
+//   db.all(sql,params, (err,rows) => {
+//     if(err) {
+//       res.status(400).json({"error": err.message});
+//       return;
+//     }
+//     res.json({
+//       "message": "success",
+//       "data": rows
+//     })
+//   })
+//   db.close();
+// })
 
 /** 
  * @route  POST api/users
@@ -29,14 +30,19 @@ router.get("/", (req,res) => {
 router.post("/register", [
   check("name").trim().escape().isLength({ min: 4 }),
   check("password").trim().escape().isLength({ min: 4 }),
-  check("confirm-password").trim().escape().isLength({ min: 4 }),
+  check("confirmPassword").trim().escape().custom((value, { req }) => {
+    if(value !== req.body.password) {
+      throw new Error("Salasanat eivät täsmää.");
+    }
+    return true;
+  }),
   
 ], (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
   }
-  const { name, password } = req.body
+  const { name, password, confirmPassword } = req.body
   const id = uuidv4();
 
   const newUser = {
@@ -58,14 +64,45 @@ router.post("/register", [
       if(err) {
         res.status(400).json({ "error": err.message })
       }
+
       res.json({
         newUser
       })
     })
+    db.close();
   });
   
 })
 
+/** 
+ * @route  GET api/users
+ * @desc   Get user info
+ * @access Public
+*/
+router.get("/:id", [
+  check("id").trim().escape()
+], (req,res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+  }
 
+  const id = req.params.id;
+
+  const sql = "SELECT id, name, createdAt FROM users WHERE id = ?";
+
+  db.get(sql, [id], (err, result) => {
+    if(err) {
+      return res.status(400).json({ "error": err.message })
+    }
+
+    res.json({
+      user: result
+    })
+
+  })
+  db.close();
+
+})
 
 module.exports = router;

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { getItems } from "../actions/itemActions";
 import { useDispatch } from "react-redux";
 
 const Search = () => {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [searchVal, setSearchVal] = useState(""); 
   const [selectVal, setSelectVal] = useState("kaikki")
+
 
   const handleChange = (e) => {
     setSelectVal(e.target.value)
@@ -13,6 +16,7 @@ const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    history.push("/");
     dispatch(getItems(searchVal))
   }
 
