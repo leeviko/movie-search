@@ -57,7 +57,7 @@ router.post("/", [
 /** 
  * @route  DELETE api/auth/logout
  * @desc   Logout user
- * @access Private
+ * @access Public
 */
 router.delete("/logout", (req, res) => {
   const sessUser = req.session.user;

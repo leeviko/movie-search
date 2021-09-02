@@ -5,23 +5,6 @@ const { check, validationResult } = require("express-validator");
 const db = require("../../config/db");
 const router = express.Router();
 
-
-// router.get("/", (req,res) => {
-//   const sql = "SELECT * FROM users";
-//   const params = [];
-//   db.all(sql,params, (err,rows) => {
-//     if(err) {
-//       res.status(400).json({"error": err.message});
-//       return;
-//     }
-//     res.json({
-//       "message": "success",
-//       "data": rows
-//     })
-//   })
-//   db.close();
-// })
-
 /** 
  * @route  POST api/users
  * @desc   Register a new user
@@ -69,36 +52,6 @@ router.post("/register", [
     })
   });
   
-})
-
-/** 
- * @route  GET api/users
- * @desc   Get user info
- * @access Public
-*/
-router.get("/:id", [
-  check("id").trim().escape()
-], (req,res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-  }
-
-  const id = req.params.id;
-
-  const sql = "SELECT id, name, createdAt FROM users WHERE id = ?";
-
-  db.get(sql, [id], (err, result) => {
-    if(err) {
-      return res.status(400).json({ "error": err.message })
-    }
-
-    res.json({
-      user: result
-    })
-
-  })
-
 })
 
 module.exports = router;
