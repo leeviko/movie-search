@@ -27,15 +27,15 @@ router.post("/", [
 
   db.get(sql, [name], (err, user) => {
     if(!user) {
-      return res.status(400).json({ msg: "Nimi tai salasana on väärä 1" })
+      return res.status(400).json({ msg: "Nimi tai salasana on väärä" })
     } else if (err) {
-      return res.status(400).json({ msg: "Nimi tai salasana on väärä 2" })
+      return res.status(400).json({ msg: "Nimi tai salasana on väärä" })
     }
 
     bcrypt.compare(password, user.password)
       .then(isMatch => {
         if(!isMatch) {
-          return res.status(400).json({ msg: "Nimi tai salasana on väärä 3" })
+          return res.status(400).json({ msg: "Nimi tai salasana on väärä" })
         } else {
 
           // Store user to sqlite session storage
@@ -71,7 +71,7 @@ router.delete("/logout", (req, res) => {
 
 /** 
  * @route  GET api/auth/isauth
- * @desc   Check if already logged in
+ * @desc   Check if already logged in & return cookie
  * @access Public
 */
 router.get("/isauth", (req, res) => {

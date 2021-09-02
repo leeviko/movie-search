@@ -18,8 +18,8 @@ const Navbar = () => {
         <h3 className="brand">Movie-Search</h3>
         <Search />
         <div className="nav-items">
-          { isAuthenticated ? <Link onClick={() =>dispatch(logout())} to="/">Kirjaudu Ulos</Link> : <Link to="/kirjaudu-sisaan">Kirjaudu Sisään</Link>}
-          
+          { isAuthenticated ? <Link onClick={() =>dispatch(logout())} to="/">Kirjaudu Ulos</Link> : <Link to="/kirjaudu-sisaan">Kirjaudu Sisään</Link> }
+          { isAuthenticated ? null : <Link to="/rekisteroidy">Rekisteröidy</Link> }
         </div>
       </div>
     </div>

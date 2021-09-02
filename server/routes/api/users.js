@@ -30,19 +30,13 @@ const router = express.Router();
 router.post("/register", [
   check("name").trim().escape().isLength({ min: 4 }),
   check("password").trim().escape().isLength({ min: 4 }),
-  check("confirmPassword").trim().escape().custom((value, { req }) => {
-    if(value !== req.body.password) {
-      throw new Error("Salasanat eivät täsmää.");
-    }
-    return true;
-  }),
   
 ], (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
   }
-  const { name, password, confirmPassword } = req.body
+  const { name, password } = req.body
   const id = uuidv4();
 
   const newUser = {
@@ -62,14 +56,17 @@ router.post("/register", [
 
     db.run(sql, params, (err,result) => {
       if(err) {
-        res.status(400).json({ "error": err.message })
+        return res.status(400).json({ "error": err.message })
       }
 
+      // Store user to sqlite session storage
+      const sessUser = { id: newUser.id, name: newUser.name };
+      req.session.user = sessUser;
+
       res.json({
-        newUser
+        sessUser
       })
     })
-    db.close();
   });
   
 })
@@ -101,7 +98,6 @@ router.get("/:id", [
     })
 
   })
-  db.close();
 
 })
 
