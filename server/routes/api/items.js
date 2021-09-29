@@ -7,6 +7,7 @@ const axios = require("axios")
  * @desc   Get a result of search query
  * @access Public
 */
+
 router.get("/result/:searchVal", (req, res) => {
   const value = req.params.searchVal;
   
